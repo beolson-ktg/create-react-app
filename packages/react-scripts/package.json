@@ -1,6 +1,6 @@
 {
-  "name": "react-scripts",
-  "version": "3.0.1",
+  "name": "@ktg/react-scripts",
+  "version": "0.0.11",
   "description": "Configuration and scripts for Create React App.",
   "repository": {
     "type": "git",
@@ -98,6 +98,13 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!src/**/stories.tsx"
     ]
   }
 }

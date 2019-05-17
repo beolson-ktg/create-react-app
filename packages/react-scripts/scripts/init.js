@@ -93,12 +93,22 @@ module.exports = function(
 
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
+  if (!useTypeScript){
+    throw new Error(
+      'TypeScript is required.  Please re-run with the --typescript argument. '
+    );
+  }
+
+
   // Setup the script rules
   appPackage.scripts = {
     start: 'react-scripts start',
     build: 'react-scripts build',
     test: 'react-scripts test',
-    eject: 'react-scripts eject',
+    "prebuild:ci": "set CI=true&&npm test -- --coverage",
+    "build:ci": "set CI=true&&npm run build",
+    "test:coverage": "react-scripts test --coverage",
+    "lint": "eslint ./src/**/**.ts*"
   };
 
   // Setup the eslint config
@@ -231,16 +241,6 @@ module.exports = function(
   console.log();
   console.log(chalk.cyan(`  ${displayedCommand} test`));
   console.log('    Starts the test runner.');
-  console.log();
-  console.log(
-    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`)
-  );
-  console.log(
-    '    Removes this tool and copies build dependencies, configuration files'
-  );
-  console.log(
-    '    and scripts into the app directory. If you do this, you can’t go back!'
-  );
   console.log();
   console.log('We suggest that you begin by typing:');
   console.log();
